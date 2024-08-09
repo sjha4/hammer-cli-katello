@@ -122,11 +122,14 @@ module HammerCLIKatello
     def content_view_version_id(options)
       key_id = HammerCLI.option_accessor_name("id")
       key_content_view_id = HammerCLI.option_accessor_name("content_view_id")
+      key_environment_id = HammerCLI.option_accessor_name("environment_id")
+
       from_environment_id = HammerCLI.option_accessor_name("from_environment_id")
 
       return options[key_id] if options[key_id]
 
       options[key_content_view_id] ||= search_and_rescue(:content_view_id, "content_view", options)
+      options[key_environment_id] ||= search_and_rescue(:environment_id, "environment", options)
 
       results = find_resources(:content_view_versions, options)
       options[from_environment_id] ||= from_lifecycle_environment_id(options)
